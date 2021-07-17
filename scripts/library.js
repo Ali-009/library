@@ -11,7 +11,9 @@ function Book(title, author, publishDate, pages, read){
 
 function addBookToLibrary(e){
 
+  if(!document.querySelector('#book-form')){
     displayForm();
+  }
 }
 
 function displayForm(){
