@@ -17,12 +17,12 @@ function addBookToLibrary(e){
 }
 
 function displayForm(){
-  let form = document.createElement('form');
+  let form = document.createElement('div');
   form.setAttribute('id','book-form');
   document.body.appendChild(form);
 
   let labelText = ['Title','Author','Publish Date','Pages','Read'];
-  let id = ['title','author','publishDate','pages','read'];
+  let id = ['title','author','publish-date','pages','read'];
   let type = ['text', 'text', 'date', 'text', 'checkbox'];
 
   //Creating form elements
@@ -37,9 +37,9 @@ function displayForm(){
     div.appendChild(input);
   }
 
-  let submitBtn = createFormElement('input', 'submit', null, 'submit-btn');
-
-  submitBtn.setAttribute('value', 'Add Book');
+  let submitBtn = document.createElement('button');
+  submitBtn.setAttribute('id', 'submit-button');
+  submitBtn.textContent = 'Add Book';
 
   form.appendChild(submitBtn);
 
@@ -65,6 +65,6 @@ function createFormElement(tag, type, text, id){
   return element;
 }
 
-let addBtn = document.querySelector('#addBtn');
+let addBtn = document.querySelector('#add-book');
 
 addBtn.addEventListener('click', addBookToLibrary);
