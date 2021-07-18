@@ -47,6 +47,7 @@ function displayLibrary(){
   for(let i = 0; i < myLibrary.length; i++){
 
     let book = document.createElement('tr');
+    book.setAttribute('data-book', i);
     library.appendChild(book);
 
     //put each book property in a table cell (td)
@@ -58,6 +59,10 @@ function displayLibrary(){
       if(info === 'read'){
         let readCheckBox = document.createElement('input');
         readCheckBox.setAttribute('type', 'checkbox');
+
+        //Added functionality to the readCheckBox
+        readCheckBox.addEventListener('click', (e) =>
+            myLibrary[i][info] = !myLibrary[i][info]);
 
         if(myLibrary[i][info]){
           readCheckBox.setAttribute('checked', '');
@@ -74,13 +79,13 @@ function displayLibrary(){
     //Add a remove button to each book
     let removeBtnCell = document.createElement('td');
     let removeBtn = document.createElement('button');
-    removeBtn.textContent = 'Remove Book';
+    removeBtn.textContent = 'X';
     book.appendChild(removeBtnCell);
     removeBtnCell.appendChild(removeBtn);
 
     removeBtn.addEventListener('click', (e) => {
       myLibrary.splice(i,1);
-      displayLibrary();
+      document.querySelector(`tr[data-book="${i}"]`).remove();
     });
   }
 }
