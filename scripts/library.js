@@ -12,8 +12,24 @@ function Book(title, author, publishDate, pages, read){
 function addBookToLibrary(e){
 
   if(!document.querySelector('#book-form')){
-    displayForm();
+    let submitBtn = displayForm();
+    submitBtn.addEventListener('click',submitBook);
   }
+}
+
+function submitBook(e){
+  let title = document.querySelector('#title').value;
+  let author = document.querySelector('#author').value;
+  let publishDate = document.querySelector('#publish-date').value;
+  let pages = document.querySelector('#pages').value;
+  let read = document.querySelector('#read').checked;
+
+  let book = new Book(title, author, publishDate, pages, read);
+
+  myLibrary.push(book);
+
+  console.table(myLibrary);
+
 }
 
 function displayForm(){
@@ -27,8 +43,16 @@ function displayForm(){
 
   //Creating form elements
   for(let i=0; i < id.length; i++){
-    let label = createFormElement('label', null, labelText[i], id[i]);
-    let input = createFormElement('input', type[i], null, id[i]);
+
+    let label = document.createElement('label');
+    label.setAttribute('for', id[i]);
+    label.textContent = labelText[i] + ': ';
+
+    let input = document.createElement('input');
+    input.setAttribute('id', id[i]);
+    input.setAttribute('name', id[i]);
+    input.setAttribute('type', type[i]);
+
 
     let div = document.createElement('div');
     form.appendChild(div);
@@ -42,28 +66,11 @@ function displayForm(){
   submitBtn.textContent = 'Add Book';
 
   form.appendChild(submitBtn);
+  return submitBtn;
 
 }
 
-function createFormElement(tag, type, text, id){
 
-  let element = document.createElement(tag);
-
-  //setting attributes and textContent of labels
-  if(tag === 'label'){
-    element.setAttribute('for', id);
-    element.textContent = text + ': ';
-  }
-
-  //Setting attributes of form inputs
-  if(tag === 'input'){
-    element.setAttribute('id', id);
-    element.setAttribute('name', id);
-    element.setAttribute('type', type);
-  }
-
-  return element;
-}
 
 let addBtn = document.querySelector('#add-book');
 
