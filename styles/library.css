@@ -1,1 +1,41 @@
 
+#container{
+
+  height: 90vh;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+}
+
+#wrapper{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+#library-system{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#add-book{
+  align-self: center;
+  order: 1;
+}
+
+#book-form{
+  display: flex;
+  flex-direction: column;
+  gap:10px;
+}
+
+.form-control{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+}

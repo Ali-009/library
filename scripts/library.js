@@ -20,7 +20,12 @@ function addBookToLibrary(e){
 function submitBook(e){
   let title = document.querySelector('#title').value;
   let author = document.querySelector('#author').value;
-  let publishDate = document.querySelector('#publish-date').value;
+
+  //Formatting the date
+  let unformattedDate = document.querySelector('#publish-date').value;
+  let splitDate = unformattedDate.split('-');
+  let publishDate = splitDate.reverse().join('/');
+
   let pages = document.querySelector('#pages').value;
   let read = document.querySelector('#read').checked;
 
@@ -42,6 +47,18 @@ function displayLibrary(){
   //All books are part of the table body of #library-table
   let library = document.createElement('tbody');
   document.querySelector('#library-table').appendChild(library);
+
+  //creating a row for metadata
+  let metaRow = document.createElement('tr');
+  library.appendChild(metaRow);
+  let metaText = ['Title','Author','Published','Pages','Read', 'Remove'];
+
+  //Metadata cells
+    for(let i = 0; i < 6; i++){
+      let metadata = document.createElement('td');
+      metadata.textContent = metaText[i];
+      metaRow.appendChild(metadata);
+    }
 
   //Goes through myLibrary Array to display each book
   for(let i = 0; i < myLibrary.length; i++){
@@ -93,7 +110,7 @@ function displayLibrary(){
 function displayForm(){
   let form = document.createElement('div');
   form.setAttribute('id','book-form');
-  document.body.appendChild(form);
+  document.querySelector('#wrapper').appendChild(form);
 
   let labelText = ['Title','Author','Publish Date','Pages','Read'];
   let id = ['title','author','publish-date','pages','read'];
@@ -113,6 +130,7 @@ function displayForm(){
 
 
     let div = document.createElement('div');
+    div.classList.add('form-control');
     form.appendChild(div);
 
     div.appendChild(label);
