@@ -11,10 +11,11 @@ function Book(title, author, publishDate, pages, read){
 
 function addBookToLibrary(e){
 
-  if(!document.querySelector('#book-form')){
     let submitBtn = displayForm();
     submitBtn.addEventListener('click',submitBook);
-  }
+    addBtn.remove();
+    document.querySelector('#library-table').remove();
+    
 }
 
 function submitBook(e){
@@ -36,29 +37,16 @@ function submitBook(e){
   //remove the form and display the library
   document.querySelector('#book-form').remove();
   displayLibrary();
+  document.querySelector('#container').appendChild(addBtn);
 }
 
 function displayLibrary(){
 
-  if(document.querySelector('tbody')){
-    document.querySelector('tbody').remove();
-  }
+  createLibraryTable();
 
   //All books are part of the table body of #library-table
   let library = document.createElement('tbody');
   document.querySelector('#library-table').appendChild(library);
-
-  //creating a row for metadata
-  let metaRow = document.createElement('tr');
-  library.appendChild(metaRow);
-  let metaText = ['Title','Author','Published','Pages','Read', 'Remove'];
-
-  //Metadata cells
-    for(let i = 0; i < 6; i++){
-      let metadata = document.createElement('td');
-      metadata.textContent = metaText[i];
-      metaRow.appendChild(metadata);
-    }
 
   //Goes through myLibrary Array to display each book
   for(let i = 0; i < myLibrary.length; i++){
@@ -105,6 +93,32 @@ function displayLibrary(){
       document.querySelector(`tr[data-book="${i}"]`).remove();
     });
   }
+}
+
+function createLibraryTable(){
+  //Removing table if it already has been created
+  if(document.querySelector('#library-table')){
+    document.querySelector('#library-table').remove();
+  }
+
+  //Creating the entire table dynamically
+  let libraryTable = document.createElement('table');
+  libraryTable.setAttribute('id','library-table');
+  document.querySelector('#library-system').appendChild(libraryTable);
+
+  //creating a row for metadata
+  let metaRow = document.createElement('tr');
+  let tableHead = document.createElement('thead')
+  libraryTable.appendChild(tableHead);
+  tableHead.appendChild(metaRow);
+  let metaText = ['Title','Author','Published','Pages','Read', 'Remove'];
+
+  //Metadata cells
+    for(let i = 0; i < 6; i++){
+      let metadata = document.createElement('th');
+      metadata.textContent = metaText[i];
+      metaRow.appendChild(metadata);
+    }
 }
 
 function displayForm(){
