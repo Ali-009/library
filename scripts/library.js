@@ -14,8 +14,9 @@ function addBookToLibrary(e){
     let submitBtn = displayForm();
     submitBtn.addEventListener('click',submitBook);
     addBtn.remove();
-    document.querySelector('#library-table').remove();
-    
+    if(document.querySelector('#library-table')){
+      document.querySelector('#library-table').remove();
+    }
 }
 
 function submitBook(e){
@@ -37,7 +38,7 @@ function submitBook(e){
   //remove the form and display the library
   document.querySelector('#book-form').remove();
   displayLibrary();
-  document.querySelector('#container').appendChild(addBtn);
+  document.querySelector('#library-system').appendChild(addBtn);
 }
 
 function displayLibrary(){
@@ -84,7 +85,7 @@ function displayLibrary(){
     //Add a remove button to each book
     let removeBtnCell = document.createElement('td');
     let removeBtn = document.createElement('button');
-    removeBtn.textContent = 'X';
+    removeBtn.textContent = 'x';
     book.appendChild(removeBtnCell);
     removeBtnCell.appendChild(removeBtn);
 
@@ -124,7 +125,7 @@ function createLibraryTable(){
 function displayForm(){
   let form = document.createElement('div');
   form.setAttribute('id','book-form');
-  document.querySelector('#wrapper').appendChild(form);
+  document.querySelector('#container').appendChild(form);
 
   let labelText = ['Title','Author','Publish Date','Pages','Read'];
   let id = ['title','author','publish-date','pages','read'];

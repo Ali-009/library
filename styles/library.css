@@ -10,20 +10,52 @@
 
 }
 
-#wrapper{
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-}
-
 #library-system{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 15px;
+  width: 60%;
+}
+
+h2{
+  font-family: sans-serif;
+}
+
+button{
+  font-family: sans-serif;
+  background-color: #F9EAD1;
 }
 
 #library-table{
-  
+  font-family: sans-serif;
+  border-collapse: collapse;
+}
+
+tr{
+  border-bottom: thin solid black;
+}
+
+thead tr{
+  background-color: #E8F2A4;
+  text-align: left;
+  color: black;
+}
+
+tbody{
+  background-color: #F3F9D1;
+}
+
+td:nth-child(n+3){
+  text-align: center;
+}
+
+th:nth-child(n+3){
+  text-align: center;
+}
+
+thead th{
+  font-weight: normal;
 }
 
 #add-book{
@@ -32,9 +64,15 @@
 }
 
 #book-form{
+  font-family: sans-serif;
   display: flex;
   flex-direction: column;
   gap:10px;
+
+  padding: 10px;
+  border: thin solid black;
+  border-radius: 2%;
+  background-color: #F3F9D1;
 }
 
 .form-control{
@@ -42,4 +80,8 @@
   flex-direction: row;
   justify-content: space-between;
   gap: 10px;
+}
+
+#publish-date{
+  flex-grow: 2;
 }
