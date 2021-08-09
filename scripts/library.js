@@ -66,9 +66,10 @@ function displayLibrary(){
         let readCheckBox = document.createElement('input');
         readCheckBox.setAttribute('type', 'checkbox');
 
+        let currentBook = myLibrary[i];
         //Added functionality to the readCheckBox
         readCheckBox.addEventListener('click', (e) =>
-            myLibrary[i][info] = !myLibrary[i][info]);
+            currentBook[info] = !currentBook[info]);
 
         if(myLibrary[i][info]){
           readCheckBox.setAttribute('checked', '');
