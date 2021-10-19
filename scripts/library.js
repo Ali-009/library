@@ -21,15 +21,37 @@ function addBookToLibrary(e){
 }
 
 function submitBook(e){
-  let title = document.querySelector('#title').value;
-  let author = document.querySelector('#author').value;
+
+  const titleElement = document.querySelector('#title');
+  let title = titleElement.value;
+
+  if(!validateInput(titleElement, 'This book needs a title')){
+    return;
+  }
+
+  const authorElement = document.querySelector('#author');
+  let author = authorElement.value;
+
+  if(!validateInput(authorElement, 'This book is missing an author')){
+    return;
+  }
+
+  const dateElement = document.querySelector('#publish-date');
+  if(!validateInput(dateElement, 'You need to include the publishing date')){
+    return;
+  }
 
   //Formatting the date
-  let unformattedDate = document.querySelector('#publish-date').value;
+  let unformattedDate = dateElement.value;
   let splitDate = unformattedDate.split('-');
   let publishDate = splitDate.reverse().join('/');
 
-  let pages = document.querySelector('#pages').value;
+  const pagesElement = document.querySelector('#pages');
+  if(!validateInput(pagesElement, 'You need to mention the number of pages')){
+    return;
+  }
+  let pages = pagesElement.value;
+
   let read = document.querySelector('#read').checked;
 
   let book = new Book(title, author, publishDate, pages, read);
@@ -40,6 +62,19 @@ function submitBook(e){
   document.querySelector('#book-form').remove();
   displayLibrary();
   document.querySelector('#library-system').appendChild(addBtn);
+}
+
+function validateInput(controlElement, customValidity){
+  if(controlElement.validity.valid){
+    return true
+  } else {
+    controlElement.setCustomValidity(customValidity);
+    controlElement.reportValidity();
+
+    //returning the element to a valid state
+    controlElement.setCustomValidity('');
+    return false;
+  }
 }
 
 function displayLibrary(){
@@ -144,7 +179,9 @@ function displayForm(){
     input.setAttribute('id', id[i]);
     input.setAttribute('name', id[i]);
     input.setAttribute('type', type[i]);
-
+    if(type[i] != 'checkbox'){
+      input.setAttribute('required', '');
+    }
 
     let div = document.createElement('div');
     div.classList.add('form-control');
